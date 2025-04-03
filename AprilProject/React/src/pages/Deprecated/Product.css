@@ -1,0 +1,45 @@
+
+/* User.css (unchanged) */
+.product-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .field {
+    margin: 5px 0;
+  }
+  
+  .key {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .value {
+    color: #555;
+  }
+  
+  /* Indentation for nested levels */
+  .nested-level-0 {
+    margin-left: 0;
+  }
+  
+  .nested-level-1 {
+    margin-left: 20px;
+  }
+  
+  .nested-level-2 {
+    margin-left: 40px;
+  }
+  
+  .nested-level-3 {
+    margin-left: 60px;
+  }
+  
+  /* Add some spacing between fields */
+  .field p {
+    margin: 2px 0;
+  }
