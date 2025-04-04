@@ -196,92 +196,75 @@ const Products = () => {
     };
 
     return (
-        <>
-            <div className={tableStyle.container}>
-                {/* Left side - Table */}
-                <div className={tableStyle.tableContainer}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col" onClick={() => handleSort('product_id')} className={tableStyle.sortable}>
-                                    Product Id {sortConfig.key === 'product_id' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}</th>
-                                <th scope="col" onClick={() => handleSort('product_name')} className={tableStyle.sortable}>
-                                    Product Name {sortConfig.key === 'product_name' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}</th>
-                                <th scope="col" onClick={() => handleSort('product_description')} className={tableStyle.sortable}>Product Description</th>
-                                <th scope="col">Product Status</th>
-                                {getMenuType() === "admin" && <th scope="col"></th>}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredData.length > 0 ? (
-                                filteredData.map((item) => (
-                                    <tr key={item.product_id}>                              
-                                        <td><button onClick={() => handleProductClick(item.product_id)}>{item.product_id}</button></td>
-                                        <td>{item.product_name}</td>
-                                        <td>{item.product_description}</td>
-                                        <td>{item.product_status ? "🟢 In Stock" : "🔴 Out of Stock"}</td>
-                                        {getMenuType() === "admin" && (
-                                            <td>
-                                                <button onClick={() => handleDelClick(item.product_id)}>Delete</button>
-                                                <button onClick={() => window.location.href = `/addproduct?id=${item.product_id}`}>Update</button>
-                                            </td>
-                                        )}
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan={getMenuType() === "admin" ? 5 : 4} style={{ textAlign: 'center' }}>
-                                        No products found
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>                     
-                    </table>
+        <div className={tableStyle.mainContainer}>
+            {/* Top Control Bar */}
+            <div className={tableStyle.controlBar}>
+                {/* Left side - Action buttons */}
+                <div className={tableStyle.actionButtons}>
+                    <button onClick={() => window.location.href = "/addproduct?id="}>
+                        Add Product
+                    </button>
+                    <button onClick={() => setShowFilterSort(true)}>
+                        Filter & Sort
+                    </button>
+                </div>
 
-                    <div className={tableStyle.buttonContainer}>
-                        <button onClick={() => window.location.href = "/addproduct?id="}>
-                            Add product
-                        </button>
-                        <button onClick={() => setShowFilterSort(true)}>
-                            Filter & Sort
-                        </button>
-                    </div>
-                    
-
-                    {/* Add pagination controls */}
+                {/* Right side - Pagination */}
+                <div className={tableStyle.paginationWrapper}>
                     <div className={tableStyle.paginationControls}>
                         <button 
                             onClick={() => handlePageChange(pagination.currentPage - 1)}
                             disabled={!pagination.hasPreviousPage}
-                            className={tableStyle.pageButton}
                         >
                             Previous
                         </button>
-                        
-                        <span className={tableStyle.pageInfo}>
-                            Page {pagination.currentPage} of {pagination.totalPages}
-                        </span>
-
+                        <span>Page {pagination.currentPage} of {pagination.totalPages}</span>
                         <button 
                             onClick={() => handlePageChange(pagination.currentPage + 1)}
                             disabled={!pagination.hasNextPage}
-                            className={tableStyle.pageButton}
                         >
                             Next
                         </button>
                     </div>
-
                     <div className={tableStyle.paginationInfo}>
-                        <p>
                         Showing {((pagination.currentPage - 1) * pageSize) + 1} - {Math.min(pagination.currentPage * pageSize, pagination.total)} of {pagination.total} products
-                        </p>
                     </div>
-                </div>                        
+                </div>
             </div>
 
-            {/* Modal Popup */}
+            {/* Products Grid */}
+            <div className={tableStyle.productsGrid}>
+                {filteredData.length > 0 ? (
+                    filteredData.map((item) => (
+                        <div key={item.product_id} className={tableStyle.productCard}>
+                            <h3 onClick={() => handleProductClick(item.product_id)}>
+                                {item.product_name}
+                            </h3>
+                            <div className={tableStyle.productInfo}>
+                                <p className={tableStyle.productId}>ID: {item.product_id}</p>
+                                <p className={tableStyle.productDescription}>{item.product_description}</p>
+                                <p className={tableStyle.productStatus}>
+                                    {item.product_status ? "🟢 In Stock" : "🔴 Out of Stock"}
+                                </p>
+                            </div>
+                            {getMenuType() === "admin" && (
+                                <div className={tableStyle.cardActions}>
+                                    <button onClick={() => handleDelClick(item.product_id)}>Delete</button>
+                                    <button onClick={() => window.location.href = `/addproduct?id=${item.product_id}`}>
+                                        Update
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <div className={tableStyle.noProducts}>No products found</div>
+                )}
+            </div>
+
+            {/* Modals */}
             {showModal && (
-                    <ProductModal 
+                <ProductModal 
                     productId={selectedProductId} 
                     onClose={closeModal} 
                     token={token}
@@ -299,7 +282,7 @@ const Products = () => {
                     isProductFilter={true}
                 />
             )}
-        </>
+        </div>
     );
 };
 
