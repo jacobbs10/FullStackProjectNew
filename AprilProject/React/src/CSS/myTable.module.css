@@ -206,3 +206,179 @@ th {
     margin-top: 10px;
 }
 
+.mainContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Control Bar Styles */
+.controlBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.actionButtons button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.actionButtons button:hover {
+    background-color: #0056b3;
+}
+
+.paginationWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.paginationControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.paginationControls button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.paginationControls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.paginationInfo {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Products Grid Styles */
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.productCard {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.productCard:hover {
+    transform: translateY(-5px);
+}
+
+.productCard h3 {
+    color: #333;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.productCard h3:hover {
+    color: #007bff;
+}
+
+.productInfo {
+    margin-bottom: 15px;
+}
+
+.productId {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.productDescription {
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.productStatus {
+    font-weight: bold;
+}
+
+.cardActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cardActions button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cardActions button:first-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+.cardActions button:last-child {
+    background-color: #007bff;
+    color: white;
+}
+
+.cardActions button:hover {
+    opacity: 0.9;
+}
+
+.noProducts {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .productsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .controlBar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .paginationWrapper {
+        align-items: center;
+    }
+
+    .productsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
