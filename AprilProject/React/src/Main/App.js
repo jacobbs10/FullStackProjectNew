@@ -48,8 +48,11 @@ useEffect(() => {
   const checkTokenValidity = () => {
     const token = sessionStorage.getItem("token");
     if (!token) {
-      handleTokenExpiration();
-      setShowLoginPrompt(true); // Only show prompt if no token
+      // Only handle token expiration if there was a previous session
+      if (sessionStorage.getItem("loginStatus") === "true") {
+        handleTokenExpiration();
+        setShowLoginPrompt(true);
+      }
       return;
     }
 
@@ -59,15 +62,18 @@ useEffect(() => {
       
       if (isExpired) {
         handleTokenExpiration();
-        setShowLoginPrompt(true); // Only show prompt if no token
+        setShowLoginPrompt(true);
       } else {
         setIsTokenValid(true);
-        setShowLoginPrompt(false); // Only show prompt if no token
+        setShowLoginPrompt(false);
       }
     } catch (error) {
       console.error("Token validation error:", error);
       setIsTokenValid(false);
-      setShowLoginPrompt(true); // Only show prompt if no token
+      // Only show prompt if there was a previous session
+      if (sessionStorage.getItem("loginStatus") === "true") {
+        setShowLoginPrompt(true);
+      }
     }
   };
 
