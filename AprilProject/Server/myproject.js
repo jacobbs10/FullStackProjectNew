@@ -24,7 +24,7 @@ app.use('/api', productRoutes);
 // Database connection
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://jacobbs:MongoKub100!@clusterfullstack.3e0w9.mongodb.net/ProductsDB?retryWrites=true&w=majority&appName=ClusterFullstack");
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log("Connected to MongoDB");
     } catch (error) {
         console.error("DB connection error:", error);
